@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Cypress Testing on Jamstack Sites</title>
+  </head>
+  <body>
+    <h1>About Cypress Testing</h1>
+
+    <p>
+      It’s great!
+    </p>
+
+    <h2>Want to see some Rick & Morty data?</h2>
+
+    <button class="load-character">Load Morty</button>
+
+    <div class="loaded-data"></div>
+
+    <p>Go back to the <a href="./index.html">home page</a>.</p>
+
+    <script>
+      function loadCharacter() {
+        fetch('https://rickandmortyapi.com/api/character/2')
+          .then((res) => res.json())
+          .then((response) => {
+            const name = document.createElement('h2');
+            name.classList.add('character-name');
+            name.innerText = response.name;
+
+            const img = document.createElement('img');
+            img.classList.add('character-image');
+            img.src = response.image;
+            img.alt = response.name;
+
+            const container = document.querySelector('.loaded-data');
+            container.appendChild(name);
+            container.appendChild(img);
+          })
+          .catch((err) => console.error(err));
+      }
+
+      document
+        .querySelector('.load-character')
+        .addEventListener('click', () => {
+          setTimeout(loadCharacter, 2500);
+        });
+    </script>
+  </body>
+</html>
