@@ -2,6 +2,8 @@
 it('loads the home page and navigates to about', () => {
   cy.visit('/');
 
+  cy.pause();
+
   cy.contains('h1', 'This Page Is Tested');
 
   cy.get('[data-test]').click();
